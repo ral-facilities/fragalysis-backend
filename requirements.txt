@@ -51,7 +51,7 @@ six==1.10.0
 socketIO-client-nexus==0.7.6
 tqdm==4.19.5
 traitlets==4.3.2
-urllib3==1.22
+urllib3==1.24.2
 wcwidth==0.1.7
 websocket-client==0.46.0
 django-webpack-loader
