@@ -57,7 +57,7 @@ def _transparentsvg(svg):
     return '<?xml version="1.0" encoding="UTF-8"?>' + ET.tostring(tree).strip()
 
 
-def highlight_diff(prb_mol, ref_mol, width, height):
+def highlight_diff(prb_mol, ref_mol, width, height, ref_type='smiles'):
     """
     Draw a molecule (prb_mol) with the differences from a reference model highlighted
     :param prb_mol: smiles of the probe molecule
@@ -71,9 +71,9 @@ def highlight_diff(prb_mol, ref_mol, width, height):
     if not height:
         height = 200
 
-    try:
+    if ref_type=='smiles':
         ref = Chem.MolFromSmiles(ref_mol)
-    except:
+    elif ref_type=='molblock':
         ref = Chem.MolFromMolBlock(ref_mol)
 
     mols = [Chem.MolFromSmiles(prb_mol), ref]
@@ -280,8 +280,6 @@ def get_highlighted_diffs(request):
     if "width" in request.GET:
         width = int(request.GET["width"])
     return HttpResponse(highlight_diff(prb_mol=prb_smiles, ref_mol=ref_smiles, height=height, width=width))
-
-
 
 
 def mol_view(request):
