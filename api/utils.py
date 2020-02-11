@@ -275,6 +275,7 @@ def get_highlighted_diffs(request):
     ref_smiles = request.GET['ref_smiles']
     height = None
     width = None
+    t = 'smiles'
     if "height" in request.GET:
         height = int(request.GET["height"])
     if "width" in request.GET:
