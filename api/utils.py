@@ -279,7 +279,9 @@ def get_highlighted_diffs(request):
         height = int(request.GET["height"])
     if "width" in request.GET:
         width = int(request.GET["width"])
-    return HttpResponse(highlight_diff(prb_mol=prb_smiles, ref_mol=ref_smiles, height=height, width=width))
+    if "type" in request.GET:
+        t = request.GET['type']
+    return HttpResponse(highlight_diff(prb_mol=prb_smiles, ref_mol=ref_smiles, height=height, width=width, ref_type=t))
 
 
 def mol_view(request):
