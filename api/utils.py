@@ -71,7 +71,12 @@ def highlight_diff(prb_mol, ref_mol, width, height):
     if not height:
         height = 200
 
-    mols = [Chem.MolFromSmiles(prb_mol), Chem.MolFromSmiles(ref_mol)]
+    try:
+        ref = Chem.MolFromSmiles(ref_mol)
+    except:
+        ref = Chem.MolFromMolBlock(ref_mol)
+
+    mols = [Chem.MolFromSmiles(prb_mol), ref]
     [Chem.Kekulize(m) for m in mols]
     match = Chem.rdFMCS.FindMCS(mols, ringMatchesRingOnly=True, completeRingsOnly=True)
     match_mol = Chem.MolFromSmarts(match.smartsString)
