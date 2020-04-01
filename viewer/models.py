@@ -45,7 +45,8 @@ class Protein(models.Model):
         choices=prot_choices, default=default_prot, max_length=2
     )
     pdb_info = models.FileField(upload_to="pdbs/", null=True, max_length=255)
-    bound_info = models.FileField(upload_to="bound/", null=True, max_length=255)
+    bound_info = models.FileField(
+        upload_to="bound/", null=True, max_length=255)
     cif_info = models.FileField(upload_to="cifs/", null=True, max_length=255)
     mtz_info = models.FileField(upload_to="mtzs/", null=True, max_length=255)
     map_info = models.FileField(upload_to="maps/", null=True, max_length=255)
@@ -95,7 +96,8 @@ class Molecule(models.Model):
     # The type of map
     # Set the groups types
     mol_choices, default_mol = get_mol_choices()
-    mol_type = models.CharField(choices=mol_choices, default=default_mol, max_length=2)
+    mol_type = models.CharField(
+        choices=mol_choices, default=default_mol, max_length=2)
     # Textfield
     sdf_info = models.TextField(null=True)
     # Float attributes
