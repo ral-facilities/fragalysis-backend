@@ -24,7 +24,14 @@ class ViewScene(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     permissions = (("view_scene", "View scene"),)
-    
+
+
+class ViewSceneTarget(models.Model):
+    """
+
+    """
+    session_id = models.ForeignKey(ViewScene)
+    target_id = models.ForeignKey(Target)
 
 
 class ProtChoice(models.Model):
@@ -36,7 +43,8 @@ class ProtChoice(models.Model):
     # Set the groups types
     DEFAULT = "DE"
     PROT_CHOICES = ((DEFAULT, "Default"),)
-    choice_type = models.CharField(choices=PROT_CHOICES, max_length=2, default=DEFAULT)
+    choice_type = models.CharField(
+        choices=PROT_CHOICES, max_length=2, default=DEFAULT)
     # Integer Score for this
     score = models.FloatField(null=True)
 
@@ -59,7 +67,8 @@ class MolChoice(models.Model):
         (PANDDA, "Pandda"),
         (GOOD_MOL, "Good molecule"),
     )
-    choice_type = models.CharField(choices=MOL_CHOICES, max_length=2, default=DEFAULT)
+    choice_type = models.CharField(
+        choices=MOL_CHOICES, max_length=2, default=DEFAULT)
     # Score -
     score = models.FloatField(null=True)
 
@@ -99,7 +108,8 @@ class ScoreChoice(models.Model):
         (INTERACTION, "Interaction fit"),
         (DENSITY_FIT, "Density Fit"),
     )
-    choice_type = models.CharField(choices=DOCK_CHOICES, max_length=2, default=DEFAULT)
+    choice_type = models.CharField(
+        choices=DOCK_CHOICES, max_length=2, default=DEFAULT)
     # Any score
     score = models.FloatField(null=True)
 
@@ -118,7 +128,8 @@ class CmpdChoice(models.Model):
     PRICE = "PR"
     TOXIC = "TO"
     CMPD_CHOICES = ((DEFAULT, "Default"), (PRICE, "Price"), (TOXIC, "Toxic"))
-    choice_type = models.CharField(choices=CMPD_CHOICES, max_length=2, default=DEFAULT)
+    choice_type = models.CharField(
+        choices=CMPD_CHOICES, max_length=2, default=DEFAULT)
     # Score between 0 and 9; Convention for n memberd list -> num_in_list/(num_choices-1)
     # E.g.
     score = models.FloatField(null=True)

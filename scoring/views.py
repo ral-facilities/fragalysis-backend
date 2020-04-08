@@ -6,6 +6,7 @@ from rest_framework import viewsets
 
 from scoring.models import (
     ViewScene,
+    ViewSceneTarget,
     ProtChoice,
     CmpdChoice,
     MolChoice,
@@ -15,6 +16,7 @@ from scoring.models import (
 )
 from scoring.serializers import (
     ViewSceneSerializer,
+    ViewSceneTargetSerializer,
     ProtChoiceSerializer,
     CmpdChoiceSerializer,
     MolChoiceSerializer,
@@ -33,6 +35,12 @@ class ViewSceneView(viewsets.ModelViewSet):
         return self.partial_update(request, *args, **kwargs)
 
 
+class ViewSceneTargetView(viewsets.ModelViewSet):
+    queryset = ViewSceneTarget.objects.filter().order_by('-modified')
+    serializer_class = ViewSceneTargetSerializer
+    filter_fields = ("session_id", "target_id")
+
+
 class ProtChoiceView(viewsets.ModelViewSet):
     queryset = ProtChoice.objects.filter()
     serializer_class = ProtChoiceSerializer
@@ -42,7 +50,8 @@ class ProtChoiceView(viewsets.ModelViewSet):
 class MolChoiceView(viewsets.ModelViewSet):
     queryset = MolChoice.objects.filter()
     serializer_class = MolChoiceSerializer
-    filter_fields = ("user_id", "mol_id", "mol_id__prot_id__target_id", "choice_type")
+    filter_fields = ("user_id", "mol_id",
+                     "mol_id__prot_id__target_id", "choice_type")
 
 
 class MolAnnotationView(viewsets.ModelViewSet):

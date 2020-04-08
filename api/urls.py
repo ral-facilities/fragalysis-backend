@@ -1,3 +1,6 @@
+from rest_framework import response, schemas
+from rest_framework.decorators import api_view, renderer_classes
+from rest_framework_swagger.renderers import OpenAPIRenderer, SwaggerUIRenderer
 from django.conf.urls import include, url
 from rest_framework.authtoken import views as drf_views
 from rest_framework.routers import DefaultRouter
@@ -39,6 +42,7 @@ router.register(r"protchoice", score_views.ProtChoiceView)
 router.register(r"cmpdchoice", score_views.CmpdChoiceView)
 # Register the scenese
 router.register(r"viewscene", score_views.ViewSceneView)
+router.register(r"viewscenetargets", score_views.ViewSceneTargetView)
 # Register the groups
 router.register(r"molgroup", score_views.MolGroupView)
 # Get the information
@@ -46,10 +50,6 @@ router.register(r"molannotation", score_views.MolAnnotationView)
 # fragspect
 router.register(r"fragspect", xcdb_views.FragspectCrystalView)
 
-
-from rest_framework_swagger.renderers import OpenAPIRenderer, SwaggerUIRenderer
-from rest_framework.decorators import api_view, renderer_classes
-from rest_framework import response, schemas
 
 
 @api_view()
