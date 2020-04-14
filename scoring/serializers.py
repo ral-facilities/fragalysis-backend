@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from scoring.models import (
     ViewScene,
+    ViewSceneTarget,
     ProtChoice,
     CmpdChoice,
     MolChoice,
@@ -11,11 +12,19 @@ from scoring.models import (
 )
 
 
+class ViewSceneTargetSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ViewSceneTarget
+        fields = ("id", "target_id", "session_id")
+
+
 class ViewSceneSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ViewScene
-        fields = ("id", "uuid", "title", "scene", "created", "modified", "user_id")
+        fields = ("id", "uuid", "title", "scene",
+                  "created", "modified", "user_id")
 
 
 class ProtChoiceSerializer(serializers.ModelSerializer):
