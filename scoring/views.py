@@ -41,6 +41,12 @@ class ViewSceneView(viewsets.ModelViewSet):
         return self.partial_update(request, *args, **kwargs)
 
 
+class ViewSceneTargetView(viewsets.ModelViewSet):
+    queryset = ViewSceneTarget.objects.filter().order_by('-modified')
+    serializer_class = ViewSceneTargetSerializer
+    filter_fields = ("session_id", "target_id")
+
+
 class ProtChoiceView(viewsets.ModelViewSet):
     queryset = ProtChoice.objects.filter()
     serializer_class = ProtChoiceSerializer

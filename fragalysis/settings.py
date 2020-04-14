@@ -18,7 +18,8 @@ from sentry_sdk.integrations.django import DjangoIntegration
 sentry_sdk.init(
     # This should be an environment variabl
     dsn="https://"
-        + os.environ.get("DJANGO_SENTRY_DSN", "9871a59d9a4f49448e6611d43fa34360")
+        + os.environ.get("DJANGO_SENTRY_DSN",
+                         "9871a59d9a4f49448e6611d43fa34360")
         + "@sentry.io/"
         + os.environ.get("DJANGO_SENTRY_ID", "1298297"),
     integrations=[DjangoIntegration()],
@@ -37,7 +38,7 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
@@ -227,6 +228,7 @@ WEBPACK_LOADER = {
     }
 }
 
-GRAPHENE = {"SCHEMA": "fragalysis.schema.schema"}  # Where your Graphene schema lives
+# Where your Graphene schema lives
+GRAPHENE = {"SCHEMA": "fragalysis.schema.schema"}
 
 GRAPH_MODELS = {"all_applications": True, "group_models": True}

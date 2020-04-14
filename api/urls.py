@@ -51,7 +51,6 @@ router.register(r"molannotation", score_views.MolAnnotationView)
 router.register(r"fragspect", xcdb_views.FragspectCrystalView)
 
 
-
 @api_view()
 @renderer_classes([SwaggerUIRenderer, OpenAPIRenderer])
 def schema_view(request):
